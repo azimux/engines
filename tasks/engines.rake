@@ -39,7 +39,7 @@ namespace :db do
       Engines.plugins.each do |plugin|
         next unless File.exists? plugin.migration_directory
         puts "Migrating plugin #{plugin.name} ..."
-        plugin.migrate
+        ActiveRecord::Migrator.migrate(plugin.migration_directory)
       end
     end
 
@@ -49,7 +49,7 @@ namespace :db do
       if plugin = Engines.plugins[name]
         version = args[:version] || ENV['VERSION']
         puts "Migrating #{plugin.name} to " + (version ? "version #{version}" : 'latest version') + " ..."
-        plugin.migrate(version ? version.to_i : nil)
+        ActiveRecord::Migrator.migrate(plugin.migration_directory, (version ? version.to_i : nil))
       else
         puts "Plugin #{name} does not exist."
       end
