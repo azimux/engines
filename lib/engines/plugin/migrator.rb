@@ -8,7 +8,7 @@
 #
 # For more information, see Engines::RailsExtensions::Migrations
 class Engines::Plugin::Migrator < ActiveRecord::Migrator
-
+  raise "do not enter here!"
   # We need to be able to set the 'current' engine being migrated.
   cattr_accessor :current_plugin
 

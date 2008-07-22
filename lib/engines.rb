@@ -91,7 +91,7 @@ module Engines
     end
     
     def load_extensions
-      rails_extensions.each { |name| require "engines/rails_extensions/#{name}" }
+      rails_extensions.each { |name| require "engines/rails_extensions/#{name}" unless name == 'migrations' }
       # load the testing extensions, if we are in the test environment.
       require "engines/testing" if RAILS_ENV == "test"
     end
