@@ -44,7 +44,7 @@ namespace :db do
     end
 
     desc 'Migrate a specified plugin.'
-    task({:plugin => :environment}, :name, :version) do |task, args|
+    task(:plugin, :name, :version, :needs => [:environment]) do |task, args|
       name = args[:name] || ENV['NAME']
       if plugin = Engines.plugins[name]
         version = args[:version] || ENV['VERSION']
